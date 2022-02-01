@@ -339,3 +339,4 @@ Testing
 Part 3
 
 1) moved basket templates folder from store to templates
+2) Created static/core/css folders and made base.css file.  Copied from Part3
