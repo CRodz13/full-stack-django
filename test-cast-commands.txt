@@ -1,0 +1,341 @@
+**Testing**
+pip install coverage
+coverage run manage.py test - Lets us know what we need to fix
+coverage report - Report coverage stats on modules
+coverage html - Create an HTML report.
+To run the test - coverage run --omit='*/venv/*' manage.py test
+python manage.py test for more code checking
+
+**Testing python code**
+pip install flake8
+create setup.cfg file to ignore certain files.  
+flake8
+pip install flake8-isort
+isort - prints out error in my code that i should fix for pep8 guidelines
+isort . automatically sorts all imports by correct order
+
+
+**Committing git**
+git init
+git status
+git add .
+git commit -m 'first commit'
+git remote add origin https://github.com/CRodz13/action-figure-trade.git
+git push origin master
+
+
+
+**START OF VeryAcademy course**
+730  mkdir prac-commerce
+731  source venv/bin/activate
+732  pip install django
+733  django-admin startproject core .
+734  python manage.py startapp store
+735  python manage.py makemigrations
+736  pip install pillow
+737  python manage.py makemigrations
+738  python manage.py migrate
+739  py manage.py createsupuser
+740  python  manage.py createsupuser
+741  python manage.py createsupuser
+742  python manage.py createsuperuser
+743  dir
+744  python manage.py createsuperuser
+745  ls
+746  venv/bin/activate
+747  source venv/bin/activate
+748  python manage.py createsuperuser
+749  python manage.py runserver
+750  pip install coverage
+751  coverage run manage.py test
+752  coverage report
+753  coverage run --omit='*/venv/*' manage.py test
+754  coverage html
+755  coverage run --omit='*/venv/*' manage.py test
+756  coverage html
+768  cd ..
+769  ls
+770  cd prac-commerce/
+771  virtualenv venv
+772  code .
+773  cd Projects/
+774  cd action-figure/
+775  ls
+776  source action-env/bin/activate
+777  code .
+778  source venv/bin/activate
+779  python manage.py runserver
+780  source venv/bin/activate
+781  python manage.py runserver
+782  coverage html
+783  coverage run --omit='*/venv/*' manage.py test
+784  python manage.py runserver
+785  coverage run --omit='*/venv/*' manage.py test
+786  coverage html
+787  coverage run --omit='*/venv/*' manage.py test
+788  pip install flake8
+789  flake8
+790  pip install flake8-isort
+791  isort
+792  isort .
+793  python manage.py runserver
+794  history
+
+Video - 2 https://www.youtube.com/watch?v=VOwfGW-ZTIY&list=PLOLrQ9Pn6caxY4Q1U9RjO1bulQp5NDYS_&index=2
+Overview: Ecommerce store session-based shopping basket (with Ajax)
+Stage:
+1) Refactoring(optional) code readability, file names, remove redundant code and add features
+2) Introducing Sessions(optional)
+3) Development
+    a. Add to basket
+    b. Delete from basket
+    c. Update basket
+4) Testing
+
+Refactoring steps...
+1) Changed 'store.views.categories' in templates to 'store.context_procers.categories'
+2) Create context_processors.py and move categories function from views.py to newly created context_processors.py.
+3) rename all_products() function to 'def product_all(request)'.  Also update its name in store/urls and every else needed
+4) Changed <div class="row py-lg-5"> in home.html to <div class="row py-lg-3">
+5) Also removed search box, home and link from nav bar
+6) removed forward slash and 'item' from urls.py path
+7) Added gitignore file
+8) added test_url_allowed_hosts function to test_views.py
+9) added STATICFILES_DIRS to settings for static folders.
+10) create static/css/js folders
+
+Using Sessions...
+-Session is temporary and interactive information
+-Single users per session - save retrieve arbitrary data on a per-site-visitor basis
+-Store the data server side 
+-User receives a session ID
+-Session ID is used to retrieve the associated data
+Sessions steps are as follow...
+1) Browser Page request from django
+2) Django Creates session and stores in DB the session ID and session data
+3) Django sends the session ID(only on page refresh or redirect) back to browser which stores the Session ID in the Cookie
+4) Browser then request with sessions ID from django
+5) Django sends back to browser on refresh or redirect and also updates session data
+This however will only update if page is refreshed. We will use Ajax and js to get around that
+
+Continuing on to project...
+1) Make sure 'django.contrib.sessions' is in INSTALLED_APPS and django.contrib.sessions.middleware.SessionsMiddleware should already be in MIDDLEWARE
+2) python manage.py startapp basket.  Delete admin and tests because they are unneeded
+3) added templates/store/basket/summary.html to project
+4) added basket/ path to core/urls.py
+5) added basket_summary() function to basket/views.py
+6) Added cart icon to basket in navigation.html
+7) created context_processors.py in basket app
+8) add to session functionality
+9) add type="button" and id="add-button" to single product html for button functionality
+10) added ajax script to end of single_product.html
+11) adding views to basket app.
+12) add url paths for basket
+PART 2 FULL list
+Refactoring Tasks (optional tasks):
+####
+06:34 Refactoring Introduction
+# Preparing for refactoring
+07:10 Downloading previous tutorial code
+08:10 Open code with Visual studio Code
+08:28 Build virtual environment and install dependencies
+# Starting to refactor project
+10:59 Reconfigure the context processor
+13:42 Remove redundant links from navbar
+15:35 Visual change to homepage element
+16:38 Creating a new custom object manager
+20:42 Removing comments from settings.py
+21:18 Renaming views
+24:26 SEO - Changing the page titles 
+25:16 Changing the template names
+26:59 Changing the URL structures - Store items
+28:57 gitignore file
+31:27 Model - adding a default image
+33:46 Changing the URL structures - Store category
+34:17 Creating a test to check AllOWED_HOSTS
+39:09 Flake8 and isort - PEP 8 compliance
+40:33 Testing - Run and Change test parameters
+44:20 Setup static folder
+
+****Important****
+Ajax will not work with the slim version of jQuery - minified version is okay.
+******************
+
+45:50 Updating the Bootstrap & jQuery CDN links
+47:04 Finished refactoring
+
+Code Repository: After Refactoring
+https://github.com/veryacademy/django...
+
+Introducing Sessions (optional step):
+####
+48:10 Introduction to sessions
+51:45 Visual explanation of sessions
+56:32 Viewing the Django database - session table
+01:02:18 Viewing the session in the browser console
+01:04:20 Django required resources to enable sessions
+
+Development Part 1.0 (Preparing the project):
+####
+01:05:30 Introduction
+01:08:24 Create a new app - basket
+01:08:56 Remove unnecessary files
+01:09:20 Configure the URL's for the basket
+01:13:58 Building the basket summary view
+01:15:50 Building the basket summary template
+01:21:45 Making the basket icon/button for the navbar
+01:28:04 VSC extension for formatting HTML/Python template files
+
+Development Part 1.2 (Building a Session):
+####
+01:30:06 Building sessions
+01:40:44 Building the context_processor file
+01:44:48 Testing the initial session setup
+
+Development Part 1.3 (Creating add functionality):
+####
+01:49:25 Building the add to cart button functionality (Ajax)
+02:03:45 URL for a the add function
+02:04:05 view for the add function
+02:08:31 updating the basket class
+02:20:52 Adding the Qty to the session data
+
+Development Part 2.0 (Deleting basket/session data):
+####
+02:40:29 Introduction - deleting session data
+02:41:41 Creating the basket summary template
+02:46:21 Iterating over the session data
+03:03:08 Get the total price of the basket items  
+
+Development Part 2.1(Front-end - deleting basket/session data):
+####
+03:07:21 Introduction - Ajax for deleting items
+03:08:35 Creating Ajax for deleting basket items
+03:12:00 Building a basket URL
+03:13:09 Creating a delete function in view
+03:14:47 Handling remove items in the basket class
+03:22:09 Resolving the unique DOM ID issue with Ajax
+03:24:27 Removing elements from the page with JavaScript
+
+Development Part 3.0 (Updating basket/session data):
+####
+03:29:01 Introduction - updating session data
+03:29:49 Capturing the user selection
+03:34:36 Create a URL for updating data
+03:34:51 Create the view function
+03:36:49 Further developing the basket class
+03:43:14 Developing the front-end code for update
+03:48:35 Resolving known issues
+03:55:52 Resolving final issue
+
+Testing
+#### 
+04:00:05 Introduction 
+04:01:11 Running existing tests
+04:05:18 Running coverage - assessing tests required
+04:07:15 Building tests for the basket appRefactoring Tasks (optional tasks):
+####
+06:34 Refactoring Introduction
+# Preparing for refactoring
+07:10 Downloading previous tutorial code
+08:10 Open code with Visual studio Code
+08:28 Build virtual environment and install dependencies
+# Starting to refactor project
+10:59 Reconfigure the context processor
+13:42 Remove redundant links from navbar
+15:35 Visual change to homepage element
+16:38 Creating a new custom object manager
+20:42 Removing comments from settings.py
+21:18 Renaming views
+24:26 SEO - Changing the page titles 
+25:16 Changing the template names
+26:59 Changing the URL structures - Store items
+28:57 gitignore file
+31:27 Model - adding a default image
+33:46 Changing the URL structures - Store category
+34:17 Creating a test to check AllOWED_HOSTS
+39:09 Flake8 and isort - PEP 8 compliance
+40:33 Testing - Run and Change test parameters
+44:20 Setup static folder
+
+****Important****
+Ajax will not work with the slim version of jQuery - minified version is okay.
+******************
+
+45:50 Updating the Bootstrap & jQuery CDN links
+47:04 Finished refactoring
+
+Code Repository: After Refactoring
+https://github.com/veryacademy/django...
+
+Introducing Sessions (optional step):
+####
+48:10 Introduction to sessions
+51:45 Visual explanation of sessions
+56:32 Viewing the Django database - session table
+01:02:18 Viewing the session in the browser console
+01:04:20 Django required resources to enable sessions
+
+Development Part 1.0 (Preparing the project):
+####
+01:05:30 Introduction
+01:08:24 Create a new app - basket
+01:08:56 Remove unnecessary files
+01:09:20 Configure the URL's for the basket
+01:13:58 Building the basket summary view
+01:15:50 Building the basket summary template
+01:21:45 Making the basket icon/button for the navbar
+01:28:04 VSC extension for formatting HTML/Python template files
+
+Development Part 1.2 (Building a Session):
+####
+01:30:06 Building sessions
+01:40:44 Building the context_processor file
+01:44:48 Testing the initial session setup
+
+Development Part 1.3 (Creating add functionality):
+####
+01:49:25 Building the add to cart button functionality (Ajax)
+02:03:45 URL for a the add function
+02:04:05 view for the add function
+02:08:31 updating the basket class
+02:20:52 Adding the Qty to the session data
+
+Development Part 2.0 (Deleting basket/session data):
+####
+02:40:29 Introduction - deleting session data
+02:41:41 Creating the basket summary template
+02:46:21 Iterating over the session data
+03:03:08 Get the total price of the basket items  
+
+Development Part 2.1(Front-end - deleting basket/session data):
+####
+03:07:21 Introduction - Ajax for deleting items
+03:08:35 Creating Ajax for deleting basket items
+03:12:00 Building a basket URL
+03:13:09 Creating a delete function in view
+03:14:47 Handling remove items in the basket class
+03:22:09 Resolving the unique DOM ID issue with Ajax
+03:24:27 Removing elements from the page with JavaScript
+
+Development Part 3.0 (Updating basket/session data):
+####
+03:29:01 Introduction - updating session data
+03:29:49 Capturing the user selection
+03:34:36 Create a URL for updating data
+03:34:51 Create the view function
+03:36:49 Further developing the basket class
+03:43:14 Developing the front-end code for update
+03:48:35 Resolving known issues
+03:55:52 Resolving final issue
+
+Testing
+#### 
+04:00:05 Introduction 
+04:01:11 Running existing tests
+04:05:18 Running coverage - assessing tests required
+04:07:15 Building tests for the basket app
+
+Part 3
+
+1) moved basket templates folder from store to templates
